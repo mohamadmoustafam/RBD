@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"
+    />
+    <title>Happy Birthday, Raheek 🌿</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ============================================================
+       GLOBAL AMBIENT LAYERS
+  ============================================================ -->
+    <div id="petals-container" class="fx-layer" aria-hidden="true"></div>
+    <div id="hearts-container" class="fx-layer" aria-hidden="true"></div>
+    <div id="confetti-container" class="fx-layer" aria-hidden="true"></div>
+    <div id="sparkle-container" class="fx-layer" aria-hidden="true"></div>
+
+    <!-- Soft glow corners -->
+    <div class="frame-corner tl" aria-hidden="true"></div>
+    <div class="frame-corner tr" aria-hidden="true"></div>
+    <div class="frame-corner bl" aria-hidden="true"></div>
+    <div class="frame-corner br" aria-hidden="true"></div>
+
+    <!-- KAWAII MASCOT -->
+    <div id="mascot" class="mascot" aria-hidden="true">
+      <svg viewBox="0 0 120 130" width="72" height="78">
+        <ellipse class="m-shadow" cx="60" cy="122" rx="26" ry="6" />
+        <path
+          class="m-ear m-ear-l"
+          d="M40 40 C34 10, 46 2, 52 8 C58 18, 54 40, 50 46 Z"
+        />
+        <path
+          class="m-ear m-ear-r"
+          d="M80 40 C86 10, 74 2, 68 8 C62 18, 66 40, 70 46 Z"
+        />
+        <path
+          class="m-ear-inner m-ear-inner-l"
+          d="M43 36 C40 18, 47 12, 50 16 C53 24, 51 36, 48 40 Z"
+        />
+        <path
+          class="m-ear-inner m-ear-inner-r"
+          d="M77 36 C80 18, 73 12, 70 16 C67 24, 69 36, 72 40 Z"
+        />
+        <ellipse class="m-body" cx="60" cy="82" rx="34" ry="30" />
+        <circle class="m-cheek m-cheek-l" cx="42" cy="80" r="6" />
+        <circle class="m-cheek m-cheek-r" cx="78" cy="80" r="6" />
+        <g class="m-eye m-eye-l">
+          <circle cx="50" cy="74" r="4.5" />
+        </g>
+        <g class="m-eye m-eye-r">
+          <circle cx="70" cy="74" r="4.5" />
+        </g>
+        <path class="m-mouth" d="M55 86 Q60 91 65 86" />
+        <ellipse class="m-nose" cx="60" cy="80" rx="2.6" ry="2" />
+        <path
+          class="m-arm m-arm-l"
+          d="M32 88 C24 90, 22 98, 28 100 C34 102, 40 96, 38 90 Z"
+        />
+        <path
+          class="m-arm m-arm-r"
+          d="M88 88 C96 90, 98 98, 92 100 C86 102, 80 96, 82 90 Z"
+        />
+      </svg>
+    </div>
+
+    <!-- Background music -->
+    <audio id="bgMusic" loop preload="auto"></audio>
+
+    <button
+      id="musicToggle"
+      class="music-toggle"
+      title="Toggle music"
+      aria-label="Toggle background music"
+    >
+      <span id="musicIcon">♪</span>
+    </button>
+
+    <main id="app">
+      <!-- ============================================================
+         PAGE 1 — WELCOME
+    ============================================================ -->
+      <section class="page active" id="page-welcome" data-page="1">
+        <div class="page-inner glass-card">
+          <p class="eyebrow">a question, for you</p>
+          <h1 class="script-heading">
+            Roka, Do You Love Me? <span class="heart-emoji">💛</span>
+          </h1>
+
+          <div class="button-row">
+            <button id="yesBtn" class="btn btn-gold" type="button">
+              Yes 💛
+            </button>
+            <button id="noBtn" class="btn btn-ghost" type="button">
+              No 🙈
+            </button>
+          </div>
+          <p class="hint">(the no button is a little shy)</p>
+        </div>
+      </section>
+
+      <!-- ============================================================
+         PAGE 2 — PASSWORD
+    ============================================================ -->
+      <section class="page" id="page-password" data-page="2">
+        <div class="page-inner glass-card">
+          <p class="eyebrow">for your eyes only</p>
+          <h2 class="script-heading small">
+            Guess the Password <span>🔐</span>
+          </h2>
+          <p class="sub-text">Hint: A+B = C</p>
+
+          <form id="passwordForm" class="password-form" autocomplete="off">
+            <input
+              type="password"
+              id="passwordInput"
+              class="password-input"
+              placeholder="Enter the secret word..."
+              aria-label="Password"
+            />
+            <button type="submit" class="btn btn-gold">Continue</button>
+          </form>
+
+          <p id="passwordError" class="error-message" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <!-- ============================================================
+         PAGE 3 — HAPPY BIRTHDAY
+    ============================================================ -->
+      <section class="page" id="page-birthday" data-page="3">
+        <div class="page-inner">
+          <h1 class="huge-heading" id="birthdayHeading">
+            <span class="letter">H</span><span class="letter">a</span
+            ><span class="letter">p</span><span class="letter">p</span
+            ><span class="letter">y</span>
+            <span class="letter">&nbsp;</span>
+            <span class="letter">B</span><span class="letter">i</span
+            ><span class="letter">r</span><span class="letter">t</span
+            ><span class="letter">h</span><span class="letter">d</span
+            ><span class="letter">a</span><span class="letter">y</span>
+            <span class="letter">&nbsp;</span> <span class="letter">R</span
+            ><span class="letter">o</span><span class="letter">k</span
+            ><span class="letter">a</span>
+            <span class="letter">&nbsp;</span>
+            <span class="letter">🌿</span>
+          </h1>
+          <button id="toLoveBtn" class="btn btn-gold">Next</button>
+        </div>
+      </section>
+
+      <!-- ============================================================
+         PAGE 4 — LOVE (typewriter)
+    ============================================================ -->
+      <section class="page" id="page-love" data-page="4">
+        <div class="page-inner glass-card">
+          <p class="eyebrow">a little truth</p>
+          <p class="typewriter" id="typewriterText"></p>
+          <button id="startBtn" class="btn btn-gold btn-large">Start 💛</button>
+        </div>
+      </section>
+
+      <!-- ============================================================
+         PAGE 5 — GIFTS
+    ============================================================ -->
+      <section class="page" id="page-gifts" data-page="5">
+        <div class="page-inner">
+          <p class="eyebrow">pick one, or all three</p>
+          <h2 class="script-heading small">A Few Gifts For You</h2>
+
+          <div class="gift-row" id="giftRow">
+            <button class="gift" data-gift="1" aria-label="Open gift one">
+              <span class="gift-envelope">
+                <span class="gift-flap"></span>
+                <span class="gift-body"></span>
+                <span class="gift-seal">🌸</span>
+              </span>
+              <span class="gift-label">for Roka</span>
+            </button>
+            <button class="gift" data-gift="2" aria-label="Open gift two">
+              <span class="gift-envelope">
+                <span class="gift-flap"></span>
+                <span class="gift-body"></span>
+                <span class="gift-seal">🐣</span>
+              </span>
+              <span class="gift-label">for Raheek</span>
+            </button>
+            <button class="gift" data-gift="3" aria-label="Open gift three">
+              <span class="gift-envelope">
+                <span class="gift-flap"></span>
+                <span class="gift-body"></span>
+                <span class="gift-seal">⭐</span>
+              </span>
+              <span class="gift-label">a little magic</span>
+            </button>
+          </div>
+
+          <button id="toPhotosBtn" class="btn btn-ghost">
+            Continue when you're ready →
+          </button>
+        </div>
+      </section>
+
+      <!-- ============================================================
+         PAGE 6 — PHOTOS (full-screen viewer)
+    ============================================================ -->
+      <section class="page" id="page-photos" data-page="6">
+        <div class="photo-viewer" id="photoViewer">
+          <div class="photo-viewer-track" id="photoTrack">
+            <figure class="photo-slide">
+              <img
+                src="photos/IMG_20230624_211248.jpg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/IMG_20230711_194147.jpg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/IMG_20240816_185339.jpg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/IMG-20240811-WA0042.jpg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/IMG-20240811-WA0113.jpg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/IMG-20250202-WA0020.jpg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 1.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 2.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 3.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 4.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 5.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 6.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 7.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 8.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 9.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 10.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 11.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 12.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 13.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 14.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 15.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 16.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 17.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 18.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="photo-slide">
+              <img
+                src="photos/WhatsApp Image 19.jpeg"
+                alt="Memory"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+
+          <button
+            class="photo-zone photo-zone-left"
+            id="photoPrevZone"
+            aria-label="Previous photo"
+          ></button>
+          <button
+            class="photo-zone photo-zone-right"
+            id="photoNextZone"
+            aria-label="Next photo"
+          ></button>
+
+          <p class="photo-caption-float">
+            Every picture tells a little piece of our story 🌿
+          </p>
+
+          <div class="photo-dots" id="photoDots"></div>
+          <div class="photo-counter" id="photoCounter">1 / 7</div>
+
+          <button id="toFinalBtn" class="btn btn-gold photo-next-page">
+            Next
+          </button>
+        </div>
+      </section>
+
+      <!-- ============================================================
+         FINAL PAGE
+    ============================================================ -->
+      <section class="page" id="page-final" data-page="7">
+        <div class="page-inner glass-card">
+          <h1 class="script-heading">
+            Enjoy Your Birthday, Roka! <span>🌿💛</span>
+          </h1>
+          <p class="final-message">
+            I hope today is filled with happiness, laughter, and beautiful
+            memories. Thank you for being such an amazing sister. I love you,
+            Raheek — always. 💛🌸
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================================================
+       LOVE LETTER MODAL
+  ============================================================ -->
+    <div id="letterModal" class="letter-modal" aria-hidden="true">
+      <div class="letter-modal-backdrop" id="letterBackdrop"></div>
+      <div class="letter-card">
+        <button class="letter-close" id="letterClose" aria-label="Close letter">
+          ✕
+        </button>
+        <p class="letter-body" id="letterBody"></p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
