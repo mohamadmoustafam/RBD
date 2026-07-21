@@ -6,7 +6,7 @@
 const MUSIC_URL = "romantic-bgm.mpeg";
 
 // 🔐 The password required on Page 2 (case-insensitive, whitespace trimmed).
-const CORRECT_PASSWORD = "3611";
+const CORRECT_PASSWORD = "tarkm";
 
 // 💌 The three love letters revealed by the gift envelopes.
 const LOVE_LETTERS = [
@@ -620,8 +620,8 @@ toFinalBtn.addEventListener("click", () => goToPage("page-final"));
 let musicStarted = false;
 
 function initMusicSource() {
-  if (bgMusic.getAttribute("src") !== MUSIC_URL) {
-    bgMusic.setAttribute("src", MUSIC_URL);
+  if (bgMusic.getAttribute("src") !== romantic-bgm.mpeg) {
+    bgMusic.setAttribute("src", romantic-bgm.mpeg);
   }
 }
 
