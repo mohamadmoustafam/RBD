@@ -620,8 +620,8 @@ toFinalBtn.addEventListener("click", () => goToPage("page-final"));
 let musicStarted = false;
 
 function initMusicSource() {
-  if (bgMusic.getAttribute("src") !== romantic-bgm.mpeg) {
-    bgMusic.setAttribute("src", romantic-bgm.mpeg);
+  if (bgMusic.getAttribute("src") !== MUSIC_URL) {
+    bgMusic.setAttribute("src", MUSIC_URL);
   }
 }
 
