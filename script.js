@@ -3,7 +3,7 @@
    ================================================================== */
 
 // 🎵 Background music source. Swap this single URL to change the track.
-const MUSIC_URL = "romantic-bgm.mpeg";
+const MUSIC_URL = "romantic-bgm.mp3";
 
 // 🔐 The password required on Page 2 (case-insensitive, whitespace trimmed).
 const CORRECT_PASSWORD = "tarkm";
